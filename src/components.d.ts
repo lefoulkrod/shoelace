@@ -141,7 +141,7 @@ export namespace Components {
         /**
           * The badge's type.
          */
-        "type": 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        "type": 'primary' | 'success' | 'info' | 'warning' | 'danger';
     }
     interface SlButton {
         /**
@@ -816,6 +816,55 @@ export namespace Components {
         "value": string;
     }
     interface SlMenuLabel {
+    }
+    interface SlPopover {
+        /**
+          * The tooltip's content.
+         */
+        "content": string;
+        /**
+          * Set to true to disable the tooltip so it won't show when triggered.
+         */
+        "disabled": boolean;
+        /**
+          * The distance in pixels from which to offset the tooltip away from its target.
+         */
+        "distance": number;
+        /**
+          * Shows the tooltip.
+         */
+        "hide": () => Promise<void>;
+        /**
+          * Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods.
+         */
+        "open": boolean;
+        /**
+          * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
+         */
+        "placement": | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
+        /**
+          * Shows the tooltip.
+         */
+        "show": () => Promise<void>;
+        /**
+          * The distance in pixels from which to offset the tooltip along its target.
+         */
+        "skidding": number;
+        /**
+          * Controls how the tooltip is activated. Possible options include `click`, `hover`, `focus`, and `manual`. Multiple options can be passed by separating them with a space. When manual is used, the tooltip must be activated programmatically.
+         */
+        "trigger": string;
     }
     interface SlProgressBar {
         /**
@@ -1506,6 +1555,12 @@ declare global {
         prototype: HTMLSlMenuLabelElement;
         new (): HTMLSlMenuLabelElement;
     };
+    interface HTMLSlPopoverElement extends Components.SlPopover, HTMLStencilElement {
+    }
+    var HTMLSlPopoverElement: {
+        prototype: HTMLSlPopoverElement;
+        new (): HTMLSlPopoverElement;
+    };
     interface HTMLSlProgressBarElement extends Components.SlProgressBar, HTMLStencilElement {
     }
     var HTMLSlProgressBarElement: {
@@ -1648,6 +1703,7 @@ declare global {
         "sl-menu-divider": HTMLSlMenuDividerElement;
         "sl-menu-item": HTMLSlMenuItemElement;
         "sl-menu-label": HTMLSlMenuLabelElement;
+        "sl-popover": HTMLSlPopoverElement;
         "sl-progress-bar": HTMLSlProgressBarElement;
         "sl-progress-ring": HTMLSlProgressRingElement;
         "sl-radio": HTMLSlRadioElement;
@@ -1796,7 +1852,7 @@ declare namespace LocalJSX {
         /**
           * The badge's type.
          */
-        "type"?: 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'text';
+        "type"?: 'primary' | 'success' | 'info' | 'warning' | 'danger';
     }
     interface SlButton {
         /**
@@ -2519,6 +2575,63 @@ declare namespace LocalJSX {
     }
     interface SlMenuLabel {
     }
+    interface SlPopover {
+        /**
+          * The tooltip's content.
+         */
+        "content"?: string;
+        /**
+          * Set to true to disable the tooltip so it won't show when triggered.
+         */
+        "disabled"?: boolean;
+        /**
+          * The distance in pixels from which to offset the tooltip away from its target.
+         */
+        "distance"?: number;
+        /**
+          * Emitted after the tooltip has hidden and all transitions are complete.
+         */
+        "onSl-after-hide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted after the tooltip has shown and all transitions are complete.
+         */
+        "onSl-aftershow"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the tooltip begins to hide. Calling `event.preventDefault()` will prevent it from being hidden.
+         */
+        "onSl-hide"?: (event: CustomEvent<any>) => void;
+        /**
+          * Emitted when the tooltip begins to show. Calling `event.preventDefault()` will prevent it from being shown.
+         */
+        "onSl-show"?: (event: CustomEvent<any>) => void;
+        /**
+          * Indicates whether or not the tooltip is open. You can use this in lieu of the show/hide methods.
+         */
+        "open"?: boolean;
+        /**
+          * The preferred placement of the tooltip. Note that the actual placement may vary as needed to keep the tooltip inside of the viewport.
+         */
+        "placement"?: | 'top'
+    | 'top-start'
+    | 'top-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left'
+    | 'left-start'
+    | 'left-end';
+        /**
+          * The distance in pixels from which to offset the tooltip along its target.
+         */
+        "skidding"?: number;
+        /**
+          * Controls how the tooltip is activated. Possible options include `click`, `hover`, `focus`, and `manual`. Multiple options can be passed by separating them with a space. When manual is used, the tooltip must be activated programmatically.
+         */
+        "trigger"?: string;
+    }
     interface SlProgressBar {
         /**
           * When true, percentage is ignored, the label is hidden, and the progress bar is drawn in an indeterminate state.
@@ -3068,6 +3181,7 @@ declare namespace LocalJSX {
         "sl-menu-divider": SlMenuDivider;
         "sl-menu-item": SlMenuItem;
         "sl-menu-label": SlMenuLabel;
+        "sl-popover": SlPopover;
         "sl-progress-bar": SlProgressBar;
         "sl-progress-ring": SlProgressRing;
         "sl-radio": SlRadio;
@@ -3120,6 +3234,7 @@ declare module "@stencil/core" {
             "sl-menu-divider": LocalJSX.SlMenuDivider & JSXBase.HTMLAttributes<HTMLSlMenuDividerElement>;
             "sl-menu-item": LocalJSX.SlMenuItem & JSXBase.HTMLAttributes<HTMLSlMenuItemElement>;
             "sl-menu-label": LocalJSX.SlMenuLabel & JSXBase.HTMLAttributes<HTMLSlMenuLabelElement>;
+            "sl-popover": LocalJSX.SlPopover & JSXBase.HTMLAttributes<HTMLSlPopoverElement>;
             "sl-progress-bar": LocalJSX.SlProgressBar & JSXBase.HTMLAttributes<HTMLSlProgressBarElement>;
             "sl-progress-ring": LocalJSX.SlProgressRing & JSXBase.HTMLAttributes<HTMLSlProgressRingElement>;
             "sl-radio": LocalJSX.SlRadio & JSXBase.HTMLAttributes<HTMLSlRadioElement>;

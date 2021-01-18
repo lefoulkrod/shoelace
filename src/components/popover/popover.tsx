@@ -13,19 +13,19 @@ let id = 0;
  */
 
 @Component({
-  tag: 'sl-tooltip',
-  styleUrl: 'tooltip.scss',
+  tag: 'sl-popover',
+  styleUrl: 'popover.scss',
   shadow: true
 })
-export class Tooltip {
-  componentId = `tooltip-${++id}`;
+export class Popover {
+  componentId = `popover-${++id}`;
   isVisible = false;
   popover: PopoverUtil;
   tooltipPositioner: HTMLElement;
   target: HTMLElement;
   tooltip: any;
 
-  @Element() host: HTMLSlTooltipElement;
+  @Element() host: HTMLSlPopoverElement;
 
   /** The tooltip's content. */
   @Prop() content = '';
@@ -252,8 +252,10 @@ export class Tooltip {
               }}
               role="tooltip"
               aria-hidden={this.open ? 'false' : 'true'}
+              style={{"background-color": "white"}}
             >
               {this.content}
+              <slot name="rich-content"></slot>
             </div>
           </div>
         )}

@@ -1,7 +1,7 @@
 import { Component, Element, Event, EventEmitter, Method, Prop, Watch, h } from '@stencil/core';
 import { scrollIntoView } from '../../utilities/scroll';
 import { getNearestTabbableElement } from '../../utilities/tabbable';
-import Popover from '../../utilities/popover';
+import PopoverUtil from '../../utilities/popover';
 
 let id = 0;
 
@@ -28,7 +28,7 @@ export class Dropdown {
   isVisible = false;
   panel: HTMLElement;
   positioner: HTMLElement;
-  popover: Popover;
+  popover: PopoverUtil;
   trigger: HTMLElement;
 
   @Element() host: HTMLSlDropdownElement;
@@ -119,7 +119,7 @@ export class Dropdown {
   }
 
   componentDidLoad() {
-    this.popover = new Popover(this.trigger, this.positioner, {
+    this.popover = new PopoverUtil(this.trigger, this.positioner, {
       strategy: this.hoist ? 'fixed' : 'absolute',
       placement: this.placement,
       distance: this.distance,

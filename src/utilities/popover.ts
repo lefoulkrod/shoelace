@@ -16,7 +16,7 @@
 //
 import { Instance as PopperInstance, createPopper } from '@popperjs/core';
 
-export default class Popover {
+export default class PopoverUtil {
   anchor: HTMLElement;
   isVisible: boolean;
   popover: HTMLElement;
